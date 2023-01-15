@@ -7,6 +7,7 @@ import  { emailrgx } from '../assets/constant'
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import {AuthContext} from '../Context/Authentication'
 import  DatabaseDetails, {auth, db , colRef, storage} from '../Database'
+import { Link } from 'react-router-dom';
 
 const schema = yup
   .object({
@@ -24,10 +25,10 @@ const schema = yup
 
   
 const Login = (props) => {
-  const {CurrentUser, setCurrentUser} = useContext(AuthContext)
-	const[eye,seteye]=useState(true);
+  const {CurrentUser, setCurrentUser, setIslogin} = useContext(AuthContext)
+	  const[eye,seteye]=useState(true);
     const [emailerror,setEmailError] = useState("");
-	const [nameerror,setNameError] = useState("");
+	  const [nameerror,setNameError] = useState("");
     const [passworderror,setPasswordError] = useState("");
     const [formgroup,setFormGroup] = useState("");
     const [loginemail, setloginEmail] = useState('');
@@ -44,7 +45,15 @@ const Login = (props) => {
 	  })
     
   const  onSubmit = (e,data) => {
-	 
+	 if(CurrentUser.name === Loginpassword && CurrentUser.email === loginemail){
+    setIslogin(true)
+    window.localStorage.setItem("logedIn",true)
+   }
+   else {
+    setError('password', {
+      message: 'password is mismatch',
+    })
+   }
 
 
   }
@@ -146,7 +155,7 @@ return (
                 {/* /Social Login */}
                 <div className="text-center dont-have">
                   Don't have an account yet?{" "}
-                  <a href="/register">Register</a>
+                  <Link to="/register">Register</Link>
                 </div>
               </div>
             </div>

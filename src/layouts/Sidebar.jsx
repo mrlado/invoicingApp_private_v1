@@ -2,6 +2,7 @@ import React, { useEffect,useState} from 'react';
 import { Link, withRouter} from 'react-router-dom';
 import FeatherIcon from 'feather-icons-react';
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import QrCodeIcon from '@mui/icons-material/QrCode';
 
 const Sidebar = (props) => {
 
@@ -45,31 +46,34 @@ const [isSideMenu, setSideMenu] = useState("")
                             <li className={`${'/customers' === pathName || '/add-customer' === pathName ||'/add-customer' === pathName ? 'active' : '' }`}>
                                 <Link to="/customers"><FeatherIcon icon="users" /><span>Customers</span></Link>
                             </li>
-                            <li className={`${'/estimates' === pathName || '/add-estimate' === pathName ||'/edit-estimate' === pathName ||'/view-estimate' === pathName ? 'active' : '' }`}>
-                                <Link to="/estimates"><FeatherIcon icon="file-text" /><span>Estimates</span></Link>
+                            <li className={`${'/products' === pathName || '/add-customer' === pathName ||'/add-customer' === pathName ? 'active' : '' }`}>
+                                <Link to="/products"><QrCodeIcon icon="users" /><span>Products</span></Link>
                             </li>
+                            {/* <li className={`${'/estimates' === pathName || '/add-estimate' === pathName ||'/edit-estimate' === pathName ||'/view-estimate' === pathName ? 'active' : '' }`}>
+                                <Link to="/estimates"><FeatherIcon icon="file-text" /><span>Estimates</span></Link>
+                            </li> */}
                            
                             <li className={`${'/invoices' === pathName || '/invoice-details' === pathName  || '/tax-settings' === pathName || '/invoice-paid' === pathName || '/invoice-overdue' === pathName || '/invoice-draft' === pathName || '/invoice-recurring' === pathName || '/invoice-cancelled' === pathName|| '/bank-settings' === pathName || '/invoices-settings' === pathName || '/invoice-grid' === pathName || '/add-invoice' === pathName || '/edit-invoice'
                              === pathName ? 'active submenu' : 'submenu' }`}>          
                                 <Link to="#" className={isSideMenu == "invoice" ? "subdrop" : ""} onClick={()=> {toggleSidebar(isSideMenu =="invoice" ? "": "invoice")}}><FeatherIcon icon="clipboard" /> <span> Invoices</span><span className="menu-arrow"></span></Link>                               
                                     { isSideMenu == "invoice" ? 
                                         <ul>
-                                            <li className={`${'/invoices' === pathName ? 'active' : '' }`}><Link to="/invoices">Invoices List</Link></li>
-                                            <li className={`${'/invoice-grid' === pathName ? 'active' : '' }`}><Link to="/invoice-grid">Invoices Grid</Link></li>
+                                            <li className={`${'/invoices' === pathName ? 'active' : '' }`}><Link to="/invoices">Invoices</Link></li>
+                                            {/* <li className={`${'/invoice-grid' === pathName ? 'active' : '' }`}><Link to="/invoice-grid">Invoices Grid</Link></li> */}
                                             <li className={`${'/add-invoice' === pathName ? 'active' : '' }`}><Link to="/add-invoice">Add Invoices</Link></li>
                                             <li className={`${'/edit-invoice' === pathName ? 'active' : '' }`}><Link to="/edit-invoice">Edit Invoices</Link></li>
                                             <li className={`${'/invoice-details' === pathName ? 'active' : '' }`}><Link to="/invoice-details">Invoices Details</Link></li>
-                                            <li className={`${'/invoices-settings' === pathName ? 'active' : '' }`}><Link to="/invoices-settings">Invoices Settings</Link></li>
+                                            {/* <li className={`${'/invoices-settings' === pathName ? 'active' : '' }`}><Link to="/invoices-settings">Invoices Settings</Link></li> */}
                                         </ul>
 										:"" 
                                     }
                             </li> 
-                            <li className={`${'/payments' === pathName || '/add-payments' === pathName ? 'active' : '' }`}>
+                            {/* <li className={`${'/payments' === pathName || '/add-payments' === pathName ? 'active' : '' }`}>
                                 <Link to="/payments"><FeatherIcon icon="credit-card" /> <span>Payments</span></Link>
-                            </li>
-                            <li className={`${'/expenses' === pathName || '/add-expenses' === pathName  || '/edit-expenses' === pathName  ? 'active' : '' }`}>
+                            </li> */}
+                            {/* <li className={`${'/expenses' === pathName || '/add-expenses' === pathName  || '/edit-expenses' === pathName  ? 'active' : '' }`}>
                                 <Link to="/expenses"><FeatherIcon icon="package" /> <span>Expenses</span></Link>
-                            </li>
+                            </li> */}
                             <li className={`${'/sales-report' === pathName || '/expenses-report' === pathName || '/profit-loss-report' === pathName
                              || '/taxs-report' === pathName ? 'active submenu' : 'submenu' }`}>          
                                 <Link to="#" className={isSideMenu == "report" ? "subdrop" : ""} onClick={()=> toggleSidebar(isSideMenu =="report" ? "": "report")}><FeatherIcon icon="pie-chart" /> <span> Reports</span><span className="menu-arrow"></span></Link>                               
@@ -83,10 +87,8 @@ const [isSideMenu, setSideMenu] = useState("")
 										:"" 
                                     }
                             </li>                            
-                            <li className={`${'/settings' === pathName || '/preferences' === pathName || '/tax-types' === pathName ||  '/expense-category' === pathName ||  '/notifications' === pathName ||  '/change-password' === pathName ||  '/delete-account' === pathName ? 'active' : '' }`}>
-                                <Link to="/settings"><FeatherIcon icon="settings" /> <span>Settings</span></Link>
-                            </li>
-                            <li className={`${'/chat' === pathName || '/calendar' === pathName || '/inbox' === pathName ? 'active submenu' : 'submenu' }`}>                            
+
+                            {/* <li className={`${'/chat' === pathName || '/calendar' === pathName || '/inbox' === pathName ? 'active submenu' : 'submenu' }`}>                            
                                 <Link to="#" className={isSideMenu == "application" ? "subdrop" : ""} onClick={()=> toggleSidebar(isSideMenu =="application" ? "": "application")}><FeatherIcon icon="grid" /> <span> Application</span> <span className="menu-arrow"></span></Link>
                                 {
                                   isSideMenu ==  "application" ? 
@@ -97,14 +99,17 @@ const [isSideMenu, setSideMenu] = useState("")
                                     </ul> : ""
                                 }
                                
-                            </li>
+                            </li> */}
                             <li className="menu-title"> 
-                                <span>Pages</span>
+                                <span>Your data</span>
                             </li>
-                            <li className={`${'/profile' === pathName ? 'active' : '' }`}> 
+                            <li className={`${'/settings' === pathName || '/preferences' === pathName || '/tax-types' === pathName ||  '/expense-category' === pathName ||  '/notifications' === pathName ||  '/change-password' === pathName ||  '/delete-account' === pathName ? 'active' : '' }`}>
+                                <Link to="/settings"><FeatherIcon icon="user-plus" /> <span>Settings</span></Link>
+                            </li>
+                            {/* <li className={`${'/profile' === pathName ? 'active' : '' }`}> 
                                 <Link to="/profile"><FeatherIcon icon="user-plus" /> <span>Profile</span></Link>
-                            </li>
-                            <li className={`${'/login' === pathName || '/register' === pathName || '/forgot-password' === pathName || '/lock-screen' === pathName ? 'active submenu' : 'submenu' }`}>
+                            </li> */}
+                            {/* <li className={`${'/login' === pathName || '/register' === pathName || '/forgot-password' === pathName || '/lock-screen' === pathName ? 'active submenu' : 'submenu' }`}>
                                 <Link to="#" className={isSideMenu == "authentication" ? "subdrop" : ""} onClick={()=> toggleSidebar(isSideMenu =="authentication" ? "": "authentication")} ><FeatherIcon icon="lock" /> <span> Authentication </span> <span className="menu-arrow"></span></Link>
                                 {
                                   isSideMenu ==  "authentication" ? 
@@ -115,8 +120,8 @@ const [isSideMenu, setSideMenu] = useState("")
                                     <li className={`${'/lock-screen' === pathName ? 'active' : '' }`}><Link to="/lock-screen"> Lock Screen </Link></li>
                                 </ul> : ""
                                 }
-                            </li>
-                            <li className={`${'/error-404' === pathName || '/error-500' === pathName  ? 'active submenu' : 'submenu' }`}>
+                            </li> */}
+                            {/* <li className={`${'/error-404' === pathName || '/error-500' === pathName  ? 'active submenu' : 'submenu' }`}>
                                 <Link to="#" className={isSideMenu == "errorPages" ? "subdrop" : ""} onClick={()=> toggleSidebar(isSideMenu =="errorPages" ? "": "errorPages")}><FeatherIcon icon="alert-octagon" />  <span> Error Pages </span> <span className="menu-arrow"></span></Link>
                                 {
                                   isSideMenu ==  "errorPages" ? 
@@ -125,17 +130,17 @@ const [isSideMenu, setSideMenu] = useState("")
                                     <li className={`${'/error-500' === pathName ? 'active' : '' }`}><Link to="/error-500">500 Error </Link></li>
                                 </ul> : ""
                                 }
-                            </li>
-                            <li className={`${'/users' === pathName ? 'active' : '' }`}> 
+                            </li> */}
+                            {/* <li className={`${'/users' === pathName ? 'active' : '' }`}> 
                                 <Link to="/users"><FeatherIcon icon="users" /> <span>Users</span></Link>
-                            </li>
-                            <li className={`${'/blank-page' === pathName ? 'active' : '' }`}> 
+                            </li> */}
+                            {/* <li className={`${'/blank-page' === pathName ? 'active' : '' }`}> 
                                 <Link to="/blank-page"><FeatherIcon icon="file" /> <span>Blank Page</span></Link>
                             </li>
                             <li className={`${'/maps-vector' === pathName ? 'active' : '' }`}> 
                                 <Link to="/maps-vector"><FeatherIcon icon="map-pin" /> <span>Vector Maps</span></Link>
-                            </li>
-                            <li className="menu-title"> 
+                            </li> */}
+                            {/* <li className="menu-title"> 
                                 <span>UI Interface</span>
                             </li>
                             <li className={`${'/components' === pathName ? 'active' : '' }`}> 
@@ -164,7 +169,7 @@ const [isSideMenu, setSideMenu] = useState("")
                                     <li className={`${'/data-tables' === pathName ? 'active' : '' }`}><Link to="/data-tables">Data Table </Link></li>
                                 </ul> :""
                                 }
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </div>

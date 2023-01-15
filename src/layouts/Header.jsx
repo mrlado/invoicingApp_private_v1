@@ -21,13 +21,13 @@ const Header = (props) => {
             <div className="header header-one">
 
 				<div className="header-left header-left-one">
-					<Link to="/index" className="logo">
+					<Link to="/" className="logo">
 						<img src={LogoImg} alt="Logo" />
 					</Link>
-					<Link to="/index" className="white-logo">
+					<Link to="/" className="white-logo">
 						<img src={logowhite} alt="Logo" />
 					</Link>
-					<Link to="/index" className="logo logo-small">
+					<Link to="/" className="logo logo-small">
 						<img src={LogoSmallImg} alt="Logo" width="30" height="30" />
 					</Link>
 				</div>

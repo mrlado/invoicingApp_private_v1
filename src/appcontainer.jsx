@@ -52,6 +52,7 @@ import SalesReport from './reports/salesreport';
 import ExpenseReport from './reports/expense';
 import ProfitlossReport from './reports/profitloss';
 import Taxreport from './reports/taxreport';
+import Register from './Authentication/Register';
 import {AuthContext} from './Context/Authentication'
 
 const AppContainer =  (props) => {
@@ -63,6 +64,7 @@ const AppContainer =  (props) => {
               <Routes>                                
               <Route path="/" element={islogin ? <Dashboard/> : <Login/>} />           
               <Route path="/customers" element={<Customers/>} />
+              <Route path="/products" element={<Customers/>} />
               <Route path="/add-customer" element={<AddCustomer/>} />
               <Route path="/edit-customer" element={<EditCustomer/>} />
               <Route path="/invoices" element={<Invoices/>} />
@@ -103,7 +105,7 @@ const AppContainer =  (props) => {
               <Route path="/maps-vector" element={<VectorMaps/>} />
               <Route path="/tables-basic" element={<BasicTables/>} />
               <Route path="/data-tables" element={<DataTables/>} />
-              {/* <Route path="/register" element={<Register/>} /> */}
+              <Route path="/register" element={<Register/>} />
               {/* <Route path="/forgot-password" element={<ForgotPassword/>} /> */}
               </Routes>
             </BrowserRouter>

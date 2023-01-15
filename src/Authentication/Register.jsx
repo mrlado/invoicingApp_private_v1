@@ -5,23 +5,11 @@ import { useForm, Controller } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup';
 import  { alphaNumericPattern, emailrgx } from '../assets/constant'
+import axios from 'axios';
+import {v4 as uuidv4} from "uuid"
+import { date } from 'yup/lib/locale';
 
-const schema = yup
-  .object({
-    name: yup.string().matches(alphaNumericPattern, 'please enther valid name')
-      .required('Please enter your name'),
-    email: yup
-      .string()
-      .matches(emailrgx, 'Email is required')
-      .required('Email is required')
-      .trim(),
-	  password: yup.string() .min(6)
-	  .max(6) .required ('Password is required')
-	  .trim(),
 
-	  confirmPassword:  yup.string() .min(6) .max(6).required('ConfirmPassword is required').trim(),
-  })
-  .required()
 
 const Register = (props) => {
 
@@ -31,38 +19,30 @@ const Register = (props) => {
     const [passworderror,setPasswordError] = useState("");
     const [formgroup,setFormGroup] = useState("");
     const [inputValues,setInputValues] = useState({
-    email:"admin@dreamguys.co.in",
-    password:"123456",
+		name: '',
+    	email:"",
+
     });
 
-	const {
-		handleSubmit,
-		control,
-		setError,
-    clearErrors,
-		formState: { errors },
-	  } = useForm({
-		resolver: yupResolver(schema),
-	  })
+
     
-  const  onSubmit = (data) => {
-	console.log("data", data)
-   
-  if(data.password != "123456") {
-	setError('password', {
-	  message: 'password is mismatch',
-	})
-} else {
-  clearErrors('password')
-  props.history.push('login') 
-  
-}
+  const  onSubmit = (e) => {
+	e.preventDefault()
+	try{
+		axios.post("https://ec2-13-53-205-89.eu-north-1.compute.amazonaws.com/api/v1/",inputValues)
+
+	}catch (e){
+		setPasswordError('password', {
+			message: 'password is mismatch',
+		  })
+	}
+
 }
 const onEyeClick = () =>{
 	seteye(!eye)
 }
  
-    
+ console.log(inputValues)
   
         return (
 			<div className="main-wrapper  login-body">
@@ -77,65 +57,40 @@ const onEyeClick = () =>{
 								<p className="account-subtitle">Access to our dashboard</p>
 								
 								{/* Form */}
-								<form onSubmit={handleSubmit(onSubmit)}>
+								<form onSubmit={onSubmit}>
 								<div className="form-group input_text">
 									<label className="form-control-label">Name</label>
-									<Controller
-												name="name"
-												control={control}
-												render={({ field: { value, onChange } }) => (
-													<input   className={`form-control ${errors?.name ? "error-input" : "" }`} type="text" value={value} onChange={onChange} autoComplete="false"  />
+													<input   className={`form-control`} 
+													type="text" name='name' value={inputValues.name} onChange={e =>setInputValues(prev => ({...prev,name:e.target.value}))} autoComplete="false"  />
 
-												)}
-												defaultValue=""
-												/>
 							
-									<small>{errors?.name?.message}</small>
+									{/* <small>{errors?.name?.message}</small> */}
                 				</div>
 								<div className="form-group input_text">
 									<label className="form-control-label">Email Address</label>
-									<Controller
-												name="email"
-												control={control}
-												render={({ field: { value, onChange } }) => (
-													<input   className={`form-control  ${errors?.email ? "error-input" : "" }`} type="text" value={value} onChange={onChange} autoComplete="false"  />
+													<input   className={`form-control `} type="text" value={inputValues.email} name="email" onChange={e =>setInputValues(prev => ({...prev,email:e.target.value}))} autoComplete="false"  />
 
-												)}
-												defaultValue="admin@dreamguys.co.in"
-												/>
 											
-									<small>{errors?.email?.message}</small>
+									{/* <small>{errors?.email?.message}</small> */}
 								</div>
 								<div className="form-group input_text">
 									<label className="form-control-label">Password</label>
-									<Controller
-										name="password"
-										control={control}
-										render={({ field: { value, onChange } }) => (
 											<div className="pass-group">
-												<input  type={eye ? "password" : "text"}  className={`form-control  ${errors?.password? "error-input" : "" }`}  value={value} onChange={onChange} autoComplete="false"  />
+												<input  type={eye ? "password" : "text"}  className={`form-control `}  value={inputValues.password} name="password" onChange={e =>setInputValues(prev => ({...prev,password:e.target.value}))} autoComplete="false"  />
 												<span onClick={onEyeClick} className={`fa toggle-password" ${eye ? "fa-eye-slash" : "fa-eye" }`}/>
 											</div>
-										)}
-										defaultValue="123456"
-										/>
+
 											
-									<small>{errors?.password?.message}</small>
+									{/* <small>{errors?.password?.message}</small> */}
 							
 									</div>  																		
 									<div className="form-group">
 										<label className="form-control-label">Confirm Password</label>
-										<Controller
-											name="confirmPassword"
-											control={control}
-											render={({ field: { value, onChange } }) => (
-												<input   className={`form-control  ${errors?.confirmPassword ? "error-input" : "" }`} type="text" value={value} onChange={onChange} autoComplete="false"  />
 
-											)}
-											defaultValue=""
-											/>
-											
-									<small>{errors?.confirmPassword?.message}</small>
+												<input   className={`form-control  `} type="text" value={inputValues.passwordConfirm} name="passwordConfirm"onChange={e =>setInputValues(prev => ({...prev,passwordConfirm:e.target.value}))} autoComplete="false"  />
+
+				
+									{/* <small>{errors?.confirmPassword?.message}</small> */}
 										
 									</div>
 									<button
@@ -157,7 +112,7 @@ const onEyeClick = () =>{
 									<a href="#" className="facebook"><i className="fab fa-facebook-f"></i></a><a href="#" className="google"><i className="fab fa-google"></i></a>
 								</div>
 								{/* /Social Login */}
-								<div className="text-center dont-have">Already have an account? <Link to="/login">Login</Link></div>
+								<div className="text-center dont-have">Already have an account? <Link to="/">Login</Link></div>
 							</div>
 						</div>
 					</div>
